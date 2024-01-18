@@ -1,4 +1,4 @@
-import React from "react";
+import Button from "../components/Button";
 
 const Home = () => {
   const handleClick = () => {
@@ -12,7 +12,7 @@ const Home = () => {
       <div className="home-content">
         <h1>Custom T-Shirts</h1>
         <p>Add your logo or image</p>
-        <button onClick={handleClick}>Customize it</button>
+        <Button title="Start" onClick={handleClick} />
       </div>
     </>
   );
