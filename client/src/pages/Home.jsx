@@ -1,28 +1,23 @@
-import { useState } from "react";
-
 import Button from "../components/Button";
 
-const Home = () => {
-  const [intro, setIntro] = useState(true);
-
-  const handleClick = () => {
-    console.log("Button clicked!");
+const Home = ({ onStartButtonClick }) => {
+  const handleStartClick = () => {
+    onStartButtonClick();
+    console.log("show customizer");
   };
-
   return (
     <>
-      {intro && (
-        <div>
-          <div className="header">
-            <h1>Home</h1>
-          </div>
-          <div className="home-content">
-            <h1>Custom T-Shirts</h1>
-            <p>Add your logo or image</p>
-            <Button title="Start" onClick={handleClick} />
-          </div>
-        </div>
-      )}
+      <div className="header">
+        <h1>Home</h1>
+        <header>
+          <img src="./threejs.png" alt="logo" width={35} />
+        </header>
+      </div>
+      <div className="home-content">
+        <h1>Custom T-Shirts</h1>
+        <p>Add your logo or image</p>
+        <Button title="Start" onClick={handleStartClick} />
+      </div>
     </>
   );
 };

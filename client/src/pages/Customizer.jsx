@@ -1,19 +1,19 @@
-import { useState } from "react";
-import { ColorPicker, FilePicker, Button, Tab } from "../components";
+import React, { useState } from "react";
+import { ColorPicker, FilePicker, Button } from "../components";
+import { swatch, fileIcon } from "../assets";
 
-const Customizer = () => {
-  const [intro, setIntro] = useState(false);
-
-  const [file, useFile] = useState("");
-  const [prompt, setPrompt] = useState("");
+const Customizer = ({ onGoBack }) => {
+  const [file, setFile] = useState("");
   const [activeEditorTab, setActiveEditorTab] = useState("");
 
   const EditorTabs = [
     {
       name: "colorpicker",
+      icon: swatch,
     },
     {
       name: "filepicker",
+      icon: fileIcon,
     },
   ];
 
@@ -29,27 +29,44 @@ const Customizer = () => {
     }
   };
 
-  const readFile = (type) => {
-    reader(file).then((result) => {
-      handleDecals(type, result);
-      setActiveEditorTab("");
-    });
+  // const reader = (file) => Promise.resolve(file);
+  // const handleDecals = (type, result) => {
+
+  // };
+
+  // const readFile = (type) => {
+  //   reader(file).then((result) => {
+  //     handleDecals(type, result);
+  //     setActiveEditorTab("");
+  //   });
+  // };
+
+  const goBack = () => {
+    console.log("Go Back button clicked in Customizer");
+    onGoBack();
   };
 
   return (
     <>
-      {!intro && (
+      <div className="left">
+        <h1>top left image here</h1>
+      </div>
+      <div>
         <div>
-          <div className="header">
-            <h1>Customizer</h1>
-          </div>
-          <div>pickers</div>
-          <div className="home-content">home content</div>
-          <div>
-            <Button title="Go Back" />
-          </div>
+          {EditorTabs.map((tab) => (
+            <div
+              key={tab.name}
+              tab={tab}
+              handleClick={() => setActiveEditorTab(tab.name)}
+            ></div>
+          ))}
+          pickers{generateTabContent()}
         </div>
-      )}
+      </div>
+
+      <div>
+        <Button title="Go Back" onClick={goBack} />
+      </div>
     </>
   );
 };
