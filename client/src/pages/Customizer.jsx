@@ -4,6 +4,7 @@ import { swatch, fileIcon } from "../assets";
 
 const Customizer = ({ onGoBack }) => {
   const [file, setFile] = useState("");
+  const [shirtColor, setShirtColor] = useState("#fff");
   const [activeEditorTab, setActiveEditorTab] = useState("");
 
   const EditorTabs = [
@@ -20,7 +21,7 @@ const Customizer = ({ onGoBack }) => {
   const generateTabContent = () => {
     switch (activeEditorTab) {
       case "colorpicker":
-        return <ColorPicker />;
+        return <ColorPicker onChange={(color) => setShirtColor(color)} />;
       case "filepicker":
         return <FilePicker file={file} setFile={setFile} readFile={readFile} />;
 
@@ -29,17 +30,14 @@ const Customizer = ({ onGoBack }) => {
     }
   };
 
-  // const reader = (file) => Promise.resolve(file);
-  // const handleDecals = (type, result) => {
+  const reader = (file) => Promise.resolve(file);
 
-  // };
-
-  // const readFile = (type) => {
-  //   reader(file).then((result) => {
-  //     handleDecals(type, result);
-  //     setActiveEditorTab("");
-  //   });
-  // };
+  const readFile = (type) => {
+    reader(file).then((result) => {
+      handleDecals(type, result);
+      setActiveEditorTab("");
+    });
+  };
 
   const goBack = () => {
     console.log("Go Back button clicked in Customizer");
@@ -48,24 +46,27 @@ const Customizer = ({ onGoBack }) => {
 
   return (
     <>
-      <div className="left">
-        <h1>top left image here</h1>
+      <div className="c-header">
+        <div className="goback-btn-container">
+          <Button title="Go Back" onClick={goBack} />
+        </div>
+        <h1>customizer header here</h1>
       </div>
       <div>
-        <div>
+        <div className="editor-tabs">
           {EditorTabs.map((tab) => (
             <div
               key={tab.name}
               tab={tab}
               onClick={() => setActiveEditorTab(tab.name)}
-            ></div>
+              className="editor-tab-name"
+            >
+              <img src={tab.icon} alt={tab.name} />
+              {tab.name}
+            </div>
           ))}
-          pickers{generateTabContent()}
+          {generateTabContent()}
         </div>
-      </div>
-
-      <div>
-        <Button title="Go Back" onClick={goBack} />
       </div>
     </>
   );

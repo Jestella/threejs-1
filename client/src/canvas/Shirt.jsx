@@ -14,6 +14,8 @@ const Shirt = () => {
           position={[0, 0.04, 0.2]} // Position of the decal
           rotation={[0, 0, 0]} // Rotation of the decal (can be a vector or a degree in radians)
           scale={0.15} // Scale of the decal
+          depthTest={false}
+          depthWrite={true}
         />
       </mesh>
     </group>
