@@ -57,7 +57,7 @@ const Customizer = ({ onGoBack }) => {
             <div
               key={tab.name}
               tab={tab}
-              handleClick={() => setActiveEditorTab(tab.name)}
+              onClick={() => setActiveEditorTab(tab.name)}
             ></div>
           ))}
           pickers{generateTabContent()}
