@@ -24,6 +24,7 @@ function App() {
         <Customizer onGoBack={handleGoBackButtonClick} />
       )}
       <CanvasModel />
+      {/* {showHome || <CanvasModel />} */}
     </main>
   );
 }

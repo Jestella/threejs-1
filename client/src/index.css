@@ -54,6 +54,9 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+/* Home */
+
+/* Customizer */
 .editor-tabs {
   background-color: gainsboro;
   position: fixed;
@@ -75,12 +78,4 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-}
-
-.header {
-  background-color: #535bf2;
-}
-
-.home-content {
-  background-color: #9a9fff;
 }

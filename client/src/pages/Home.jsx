@@ -6,7 +6,7 @@ const Home = ({ onStartButtonClick }) => {
     console.log("show customizer");
   };
   return (
-    <>
+    <div className="home">
       <div className="header">
         <h1>Home</h1>
         <header>
@@ -18,7 +18,7 @@ const Home = ({ onStartButtonClick }) => {
         <p>Add your logo or image</p>
         <Button title="Start" onClick={handleStartClick} />
       </div>
-    </>
+    </div>
   );
 };
 

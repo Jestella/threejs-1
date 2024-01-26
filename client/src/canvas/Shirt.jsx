@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useRef } from "react";
+import { useFrame } from "@react-three/fiber";
+import { easing } from "maath";
+
 import { Decal, useGLTF, useTexture } from "@react-three/drei";
 
 const Shirt = () => {
   const { nodes, materials } = useGLTF("/shirt_baked.glb");
+  const snap = useRef({
+    color: [1, 1, 1], // Adjust with your initial color
+  });
+
+  useFrame((state, delta) =>
+    easing.dampC(materials.lambert1.color, snap.color, 0.25, delta)
+  );
+
   return (
-    <group>
+    <group scale={[5, 5, 5]}>
       <mesh
         geometry={nodes.T_Shirt_male.geometry}
         material={materials.lambert1}
