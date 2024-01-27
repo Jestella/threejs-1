@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { ColorPicker, FilePicker, Button } from "../components";
 import { swatch, fileIcon } from "../assets";
 
+import state from "../store";
+
 const Customizer = ({ onGoBack }) => {
   const [file, setFile] = useState("");
-  const [shirtColor, setShirtColor] = useState("#fff");
   const [activeEditorTab, setActiveEditorTab] = useState("");
 
   const EditorTabs = [
@@ -21,10 +22,9 @@ const Customizer = ({ onGoBack }) => {
   const generateTabContent = () => {
     switch (activeEditorTab) {
       case "colorpicker":
-        return <ColorPicker onChange={(color) => setShirtColor(color)} />;
+        return <ColorPicker />;
       case "filepicker":
         return <FilePicker file={file} setFile={setFile} readFile={readFile} />;
-
       default:
         return null;
     }
