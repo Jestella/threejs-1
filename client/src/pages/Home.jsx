@@ -12,9 +12,13 @@ const Home = () => {
       {snap.intro && (
         <div className="home">
           <div className="header">
-            <h1>Custom T-Shirts</h1>
+            <h1 className="text-l">Custom T-Shirts</h1>
             <p>Add your logo or image</p>
-            <Button title="Start" handleClick={() => (state.intro = false)} />
+            <Button
+              title="Start"
+              type="filled"
+              handleClick={() => (state.intro = false)}
+            />
           </div>
         </div>
       )}

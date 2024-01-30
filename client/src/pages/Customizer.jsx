@@ -38,7 +38,12 @@ const Customizer = () => {
   const readFile = (type) => {
     reader(file).then((result) => {
       handleDecals(type, result);
+      setActiveEditorTab("");
     });
+  };
+
+  const toggleTab = (tabName) => {
+    setActiveEditorTab((prevTab) => (prevTab === tabName ? "" : tabName));
   };
 
   return (
@@ -46,18 +51,25 @@ const Customizer = () => {
       {!snap.intro && (
         <>
           <div className="header">
-            <h1>Customize it!</h1>
+            <h1 className="text-l">Customize it!</h1>
             <p>Choose color and upload your file</p>
-            <Button title="Go Back" handleClick={() => (state.intro = true)} />
+            <Button
+              title="Go Back"
+              type="filled"
+              handleClick={() => (state.intro = true)}
+            />
           </div>
-          <div>
+
+          <div className="editor-tabs-container">
             <div className="editor-tabs">
               {EditorTabs.map((tab) => (
                 <div
                   key={tab.name}
                   tab={tab}
-                  onClick={() => setActiveEditorTab(tab.name)}
-                  className="editor-tab-name"
+                  onClick={() => toggleTab(tab.name)} // Use toggleTab function here
+                  className={`editor-tab-name ${
+                    activeEditorTab === tab.name ? "active" : ""
+                  }`}
                 >
                   <img src={tab.icon} alt={tab.name} />
                   {/* {tab.name} */}

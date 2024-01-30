@@ -30,11 +30,6 @@ body {
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  margin: 0;
-}
-
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -61,6 +56,19 @@ button:focus-visible {
   overflow: hidden;
 }
 
+.text-l {
+  font-size: 3rem;
+  margin-bottom: 0;
+}
+
+.text-s {
+  font-size: 0.9rem;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+}
+
 /* Home */
 
 .header {
@@ -74,16 +82,51 @@ button:focus-visible {
 /* Customizer */
 
 .editor-tabs {
-  position: fixed;
-  bottom: 20%;
-  background-color: #f9f5f5;
+  width: 4rem;
+  background-color: blue;
   padding: 0.5rem;
-  border-radius: 1rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  top: 50vh;
 }
 
 .editor-tab-name img {
   width: 4rem;
   height: auto;
+}
+
+.colorpicker-container,
+.filepicker-container {
+  position: absolute;
+  left: 0;
+  margin-left: 6rem;
+}
+
+.filepicker {
+  background-color: #fff;
+  border: 1px solid gray;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.filepicker-label {
+  border: 1px solid gray;
+  margin: 0.3rem;
+}
+
+input[type="file"] {
+  z-index: -1;
+  position: absolute;
+  opacity: 0;
+}
+
+.file-name {
+  color: #999;
 }
 
 /* Canvas */

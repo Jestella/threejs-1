@@ -7,7 +7,7 @@ const ColorPicker = () => {
   const snap = useSnapshot(state);
 
   return (
-    <div>
+    <div className="colorpicker-container">
       <SketchPicker
         color={snap.color}
         disableAlpha
