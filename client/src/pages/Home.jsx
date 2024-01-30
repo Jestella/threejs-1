@@ -1,24 +1,24 @@
+import { useSnapshot } from "valtio";
+
+import state from "../store";
+
 import Button from "../components/Button";
 
-const Home = ({ onStartButtonClick }) => {
-  const handleStartClick = () => {
-    onStartButtonClick();
-    console.log("show customizer");
-  };
+const Home = () => {
+  const snap = useSnapshot(state);
+
   return (
-    <div className="home">
-      <div className="header">
-        <h1>Home</h1>
-        <header>
-          <img src="./threejs.png" alt="logo" width={35} />
-        </header>
-      </div>
-      <div className="home-content">
-        <h1>Custom T-Shirts</h1>
-        <p>Add your logo or image</p>
-        <Button title="Start" onClick={handleStartClick} />
-      </div>
-    </div>
+    <>
+      {snap.intro && (
+        <div className="home">
+          <div className="header">
+            <h1>Custom T-Shirts</h1>
+            <p>Add your logo or image</p>
+            <Button title="Start" handleClick={() => (state.intro = false)} />
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

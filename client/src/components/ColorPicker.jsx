@@ -1,16 +1,17 @@
-import { useState } from "react";
-
 import { SketchPicker } from "react-color";
+import { useSnapshot } from "valtio";
+
+import state from "../store";
 
 const ColorPicker = () => {
-  const [color, setColor] = useState("#fff");
+  const snap = useSnapshot(state);
 
   return (
     <div>
       <SketchPicker
-        color={color}
+        color={snap.color}
         disableAlpha
-        onChange={(newColor) => setColor(newColor.hex)}
+        onChange={(color) => (state.color = color.hex)}
       />
     </div>
   );

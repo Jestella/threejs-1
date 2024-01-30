@@ -1,30 +1,31 @@
 import React, { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
+import { useSnapshot } from "valtio";
 import { easing } from "maath";
-
-import { Decal, useGLTF, useTexture } from "@react-three/drei";
+import { Decal, useGLTF } from "@react-three/drei";
+import state from "../store";
 
 const Shirt = () => {
+  const snap = useSnapshot(state);
   const { nodes, materials } = useGLTF("/shirt_baked.glb");
-  const snap = useRef({
-    color: [1, 1, 1], // Adjust with your initial color
-  });
 
   useFrame((state, delta) =>
     easing.dampC(materials.lambert1.color, snap.color, 0.25, delta)
   );
+  const stateString = JSON.stringify(snap);
 
   return (
-    <group scale={[5, 5, 5]}>
+    <group key={stateString}>
       <mesh
         geometry={nodes.T_Shirt_male.geometry}
         material={materials.lambert1}
+        material-roughness={1}
+        dispose={null}
       >
         <Decal
-          debug // Makes "bounding box" of the decal visible
-          position={[0, 0.04, 0.2]} // Position of the decal
-          rotation={[0, 0, 0]} // Rotation of the decal (can be a vector or a degree in radians)
-          scale={0.15} // Scale of the decal
+          position={[0, 0.04, 0.15]}
+          rotation={[0, 0, 0]}
+          scale={0.15}
           depthTest={false}
           depthWrite={true}
         />

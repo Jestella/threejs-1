@@ -1,29 +1,32 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useSnapshot } from "valtio";
+import state from "../store";
+
 import { ColorPicker, FilePicker, Button } from "../components";
 import { swatch, fileIcon } from "../assets";
 
-import state from "../store";
+const Customizer = () => {
+  const snap = useSnapshot(state);
 
-const Customizer = ({ onGoBack }) => {
   const [file, setFile] = useState("");
   const [activeEditorTab, setActiveEditorTab] = useState("");
 
   const EditorTabs = [
     {
-      name: "colorpicker",
+      name: "color",
       icon: swatch,
     },
     {
-      name: "filepicker",
+      name: "file",
       icon: fileIcon,
     },
   ];
 
   const generateTabContent = () => {
     switch (activeEditorTab) {
-      case "colorpicker":
+      case "color":
         return <ColorPicker />;
-      case "filepicker":
+      case "file":
         return <FilePicker file={file} setFile={setFile} readFile={readFile} />;
       default:
         return null;
@@ -35,39 +38,36 @@ const Customizer = ({ onGoBack }) => {
   const readFile = (type) => {
     reader(file).then((result) => {
       handleDecals(type, result);
-      setActiveEditorTab("");
     });
-  };
-
-  const goBack = () => {
-    console.log("Go Back button clicked in Customizer");
-    onGoBack();
   };
 
   return (
     <>
-      <div className="c-header">
-        <div className="goback-btn-container">
-          <Button title="Go Back" onClick={goBack} />
-        </div>
-        <h1>customizer header here</h1>
-      </div>
-      <div>
-        <div className="editor-tabs">
-          {EditorTabs.map((tab) => (
-            <div
-              key={tab.name}
-              tab={tab}
-              onClick={() => setActiveEditorTab(tab.name)}
-              className="editor-tab-name"
-            >
-              <img src={tab.icon} alt={tab.name} />
-              {tab.name}
+      {!snap.intro && (
+        <>
+          <div className="header">
+            <h1>Customize it!</h1>
+            <p>Choose color and upload your file</p>
+            <Button title="Go Back" handleClick={() => (state.intro = true)} />
+          </div>
+          <div>
+            <div className="editor-tabs">
+              {EditorTabs.map((tab) => (
+                <div
+                  key={tab.name}
+                  tab={tab}
+                  onClick={() => setActiveEditorTab(tab.name)}
+                  className="editor-tab-name"
+                >
+                  <img src={tab.icon} alt={tab.name} />
+                  {/* {tab.name} */}
+                </div>
+              ))}
+              {generateTabContent()}
             </div>
-          ))}
-          {generateTabContent()}
-        </div>
-      </div>
+          </div>
+        </>
+      )}
     </>
   );
 };
