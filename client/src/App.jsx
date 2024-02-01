@@ -2,7 +2,7 @@ import Home from "./pages/Home";
 import Customizer from "./pages/Customizer";
 import CanvasModel from "./canvas";
 
-import "./App.css";
+import "./App.scss";
 
 function App() {
   return (

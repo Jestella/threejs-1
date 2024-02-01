@@ -3,7 +3,7 @@ import { useSnapshot } from "valtio";
 import state from "../store";
 
 import { ColorPicker, FilePicker, Button } from "../components";
-import { swatch, fileIcon } from "../assets";
+import { swatch, fileIcon, reset } from "../assets";
 
 const Customizer = () => {
   const snap = useSnapshot(state);
@@ -20,6 +20,10 @@ const Customizer = () => {
       name: "file",
       icon: fileIcon,
     },
+    {
+      name: "reset",
+      icon: reset,
+    },
   ];
 
   const generateTabContent = () => {
@@ -28,22 +32,36 @@ const Customizer = () => {
         return <ColorPicker />;
       case "file":
         return <FilePicker file={file} setFile={setFile} readFile={readFile} />;
+      // case "reset":
+      //   return (
+      //     // fix reset button
+      //     <Button title="Reset" type="outlined" handleClick={handleReset} />
+      //   );
       default:
         return null;
     }
   };
 
-  const reader = (file) => Promise.resolve(file);
+  const reader = (file) =>
+    new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.onload = () => resolve(fileReader.result);
+      fileReader.readAsDataURL(file);
+    });
 
   const readFile = (type) => {
     reader(file).then((result) => {
-      handleDecals(type, result);
+      state.logoDecal = result;
       setActiveEditorTab("");
     });
   };
 
   const toggleTab = (tabName) => {
     setActiveEditorTab((prevTab) => (prevTab === tabName ? "" : tabName));
+  };
+
+  const handleReset = () => {
+    state.logoDecal = "";
   };
 
   return (
@@ -66,7 +84,7 @@ const Customizer = () => {
                 <div
                   key={tab.name}
                   tab={tab}
-                  onClick={() => toggleTab(tab.name)} // Use toggleTab function here
+                  onClick={() => toggleTab(tab.name)}
                   className={`editor-tab-name ${
                     activeEditorTab === tab.name ? "active" : ""
                   }`}

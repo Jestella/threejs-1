@@ -83,7 +83,7 @@ button:focus-visible {
 
 .editor-tabs {
   width: 4rem;
-  background-color: blue;
+  background-color: #f4efef;
   padding: 0.5rem;
   border-radius: 8px;
   display: flex;
@@ -111,12 +111,20 @@ button:focus-visible {
   border-radius: 8px;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  justify-content: space-around;
+  width: 8rem;
+  height: 10rem;
+  padding: 0.5rem;
 }
 
 .filepicker-label {
-  border: 1px solid gray;
-  margin: 0.3rem;
+  border: 1px solid #999;
+  border-radius: 5px;
+  color: #999;
+
+  &:hover {
+    color: #090909;
+  }
 }
 
 input[type="file"] {
@@ -126,7 +134,7 @@ input[type="file"] {
 }
 
 .file-name {
-  color: #999;
+  color: #d5d1d1;
 }
 
 /* Canvas */

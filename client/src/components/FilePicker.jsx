@@ -1,4 +1,7 @@
 import Button from "./Button";
+
+import state from "../store";
+
 const FilePicker = ({ file, setFile, readFile }) => {
   return (
     <div className="filepicker-container">
@@ -15,12 +18,8 @@ const FilePicker = ({ file, setFile, readFile }) => {
         <p className="file-name text-xs">
           {file === "" ? "No file selected" : file.name}
         </p>
+        <Button type="outline" title="Submit" handleClick={() => readFile()} />
       </div>
-      <Button
-        type="outline"
-        title="Submit"
-        handleClick={() => readFile("logo")}
-      />
     </div>
   );
 };
