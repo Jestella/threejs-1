@@ -10,7 +10,7 @@ const CameraRig = ({ children }) => {
   const snap = useSnapshot(state);
 
   useFrame((state, delta) => {
-    const isBreakpoint = window.innerWidth <= 1260;
+    const isBreakpoint = window.innerWidth <= 2000;
     const isMobile = window.innerWidth <= 600;
 
     let targetPosition = [-0.4, 0, 2];

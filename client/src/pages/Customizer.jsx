@@ -3,7 +3,7 @@ import { useSnapshot } from "valtio";
 import state from "../store";
 
 import { ColorPicker, FilePicker, Button } from "../components";
-import { swatch, fileIcon, reset } from "../assets";
+import { swatch, fileIcon } from "../assets";
 
 const Customizer = () => {
   const snap = useSnapshot(state);
@@ -20,10 +20,6 @@ const Customizer = () => {
       name: "file",
       icon: fileIcon,
     },
-    {
-      name: "reset",
-      icon: reset,
-    },
   ];
 
   const generateTabContent = () => {
@@ -32,11 +28,7 @@ const Customizer = () => {
         return <ColorPicker />;
       case "file":
         return <FilePicker file={file} setFile={setFile} readFile={readFile} />;
-      // case "reset":
-      //   return (
-      //     // fix reset button
-      //     <Button title="Reset" type="outlined" handleClick={handleReset} />
-      //   );
+
       default:
         return null;
     }
@@ -49,7 +41,7 @@ const Customizer = () => {
       fileReader.readAsDataURL(file);
     });
 
-  const readFile = (type) => {
+  const readFile = () => {
     reader(file).then((result) => {
       state.logoDecal = result;
       setActiveEditorTab("");
@@ -60,17 +52,12 @@ const Customizer = () => {
     setActiveEditorTab((prevTab) => (prevTab === tabName ? "" : tabName));
   };
 
-  const handleReset = () => {
-    state.logoDecal = "";
-  };
-
   return (
     <>
       {!snap.intro && (
         <>
           <div className="header">
-            <h1 className="text-l">Customize it!</h1>
-            <p>Choose color and upload your file</p>
+            <h1 className="text-l">Customizer</h1>
             <Button
               title="Go Back"
               type="filled"

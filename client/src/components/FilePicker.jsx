@@ -1,7 +1,5 @@
 import Button from "./Button";
 
-import state from "../store";
-
 const FilePicker = ({ file, setFile, readFile }) => {
   return (
     <div className="filepicker-container">

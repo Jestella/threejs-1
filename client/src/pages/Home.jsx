@@ -13,7 +13,6 @@ const Home = () => {
         <div className="home">
           <div className="header">
             <h1 className="text-l">Custom T-Shirts</h1>
-            <p>Add your logo or image</p>
             <Button
               title="Start"
               type="filled"
